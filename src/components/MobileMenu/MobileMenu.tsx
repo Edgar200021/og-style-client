@@ -1,13 +1,14 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 
 import {Input} from "../ui/Input.tsx";
 
-import {CATEGORIES, NAVIGATION} from "../../config/constants.ts";
 import {cn} from "../../utils/cn.ts";
 
 import arrowIcon from '../../assets/icons/arrow.svg'
 import sprites from '../../assets/icons/sprite.svg'
+import {useOnClickOutside} from "usehooks-ts";
+import {CATEGORIES, NAVIGATION} from "../../constants/header.ts";
 
 interface Props {
 	className?: string
@@ -15,22 +16,34 @@ interface Props {
 }
 export const MobileMenu = ({className, isVisible}: Props) => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false)
+	const ref = useRef(null)
+
+	const closeMenu = () => {
+		setIsMenuVisible(false)
+		document.body.style.overflow = 'auto'
+	}
+
+	useOnClickOutside(ref, closeMenu, 'mousedown')
 
 	return (
 			<>
-				<span onClick={() => setIsMenuVisible(!isMenuVisible)}
-				      className={cn('h-4 w-6 cursor-pointer flex items-center justify-center relative before:absolute before:top-0 before:left-0 before:bg-black before:content-[""] before:w-full before:h-[2px]  after:absolute after:bottom-0 after:left-0 after:bg-black after:content-[""] after:w-full after:h-[2px] before:transition-all before:duration-300 before:ease after:transition-all after:duration-300 after:ease', {
+				<button  onClick={() => {
+					setIsMenuVisible(!isMenuVisible)
+					document.body.style.overflow = isMenuVisible ? 'auto' : 'hidden'
+				}}
+				      className={cn('md:hidden h-4 w-6 cursor-pointer flex items-center justify-center relative before:absolute before:top-0 before:left-0 before:bg-black before:content-[""] before:w-full before:h-[2px]  after:absolute after:bottom-0 after:left-0 after:bg-black after:content-[""] after:w-full after:h-[2px] before:transition-all before:duration-300 before:ease after:transition-all after:duration-300 after:ease', {
 					      'before:rotate-45 before:top-[50%] before:-translate-y-[50%] after:-rotate-45 after:top-[50%] after:-translate-y-[50%]': isVisible !== undefined ? isVisible : isMenuVisible
 				      })}>
 							<span
 									className={cn('bg-black w-full h-[2px] transition-opacity duration-300 ease', {'opacity-0': isVisible !== undefined ? isVisible : isMenuVisible})}></span>
-						</span>
+						</button>
 
-				<div className={cn('w-full backdrop-blur-2xl absolute h-[calc(100svh-80px)] transition-all duration-300 ease top-[80px] -left-[100%]', {'left-0': isVisible !== undefined ? isVisible : isMenuVisible})}>
+				<div className={cn('md:hidden w-full backdrop-blur-2xl absolute h-[calc(100svh-80px)] transition-all duration-300 ease top-[80px] -left-[100%]', {'left-0': isVisible !== undefined ? isVisible : isMenuVisible})}>
 					<div
+							ref={ref}
 							className={cn('max-w-[360px] w-full h-full  flex flex-col justify-between ', className, )}>
 
-						<div className='px-4'>
+						<div className='px-4 bg-white'>
 							<div
 									className='pb-3 mb-6 border-b-[1px] border-b-gray-300 text-dark text-sm flex items-center justify-between gap-x-2'>
 								<a className='flex items-center gap-x-[6px] justify-between ' href='mailto:order@ogstyle.ru'>order@ogstyle.ru

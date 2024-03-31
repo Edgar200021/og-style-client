@@ -5,6 +5,7 @@ import {ForgotPasswordForm} from "../components/forms/ForgotPasswordForm.tsx";
 import {ForgotPasswordPage} from "../pages/ForgotPasswordPage.tsx";
 import ResetPasswordPage from "../pages/ResetPasswordPage.tsx";
 import {AppLayout} from "../layouts/AppLayout/AppLayout.tsx";
+import {MainPage} from "../pages/MainPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -31,7 +32,11 @@ export const router = createBrowserRouter([
 	},
 	{
 		path: "/",
-		element: <AppLayout/>
+		element: <AppLayout/>,
+		children: [{
+			index: true,
+			element: <MainPage/>
+		}]
 	}
 
 ])

@@ -4,7 +4,7 @@ import {Outlet} from "react-router";
 export const AppLayout = () => {
 	return (
 			<>
-				<Header/>
+				<Header className='mb-9'/>
 				<Outlet/>
 			</>
 	);
