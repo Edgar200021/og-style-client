@@ -3,7 +3,7 @@ import {useResetPasswordMutation} from "../../store/auth/authApi.ts";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {resetPasswordSchema, ResetPasswordSchema} from "../../schemas/resetPasswordSchema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {showEerror} from "../../utils/showError.ts";
+import {showError} from "../../utils/showError.ts";
 import {toast} from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
 import {Button} from "../ui/Button.tsx";
@@ -27,7 +27,7 @@ export const ResetPasswordForm = ({email}: Props ) => {
 			toast.success('Сброс пароля прошла успешно')
 			navigate('/auth/sign-in')
 		} catch (e) {
-			showEerror(e)
+			showError(e)
 		}
 	}
 

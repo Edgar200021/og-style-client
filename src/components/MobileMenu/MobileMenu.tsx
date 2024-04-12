@@ -32,13 +32,13 @@ export const MobileMenu = ({className, isVisible}: Props) => {
 					document.body.style.overflow = isMenuVisible ? 'auto' : 'hidden'
 				}}
 				      className={cn('md:hidden h-4 w-6 cursor-pointer flex items-center justify-center relative before:absolute before:top-0 before:left-0 before:bg-black before:content-[""] before:w-full before:h-[2px]  after:absolute after:bottom-0 after:left-0 after:bg-black after:content-[""] after:w-full after:h-[2px] before:transition-all before:duration-300 before:ease after:transition-all after:duration-300 after:ease', {
-					      'before:rotate-45 before:top-[50%] before:-translate-y-[50%] after:-rotate-45 after:top-[50%] after:-translate-y-[50%]': isVisible !== undefined ? isVisible : isMenuVisible
+					      'before:rotate-45 before:top-[50%] before:-translate-y-[50%] after:-rotate-45 after:top-[50%] after:-translate-y-[50%] ': isVisible !== undefined ? isVisible : isMenuVisible
 				      })}>
 							<span
 									className={cn('bg-black w-full h-[2px] transition-opacity duration-300 ease', {'opacity-0': isVisible !== undefined ? isVisible : isMenuVisible})}></span>
 						</button>
 
-				<div className={cn('md:hidden w-full backdrop-blur-2xl absolute h-[calc(100svh-80px)] transition-all duration-300 ease top-[80px] -left-[100%]', {'left-0': isVisible !== undefined ? isVisible : isMenuVisible})}>
+				<div className={cn('md:hidden w-full z-[100] backdrop-blur-2xl absolute h-[calc(100svh-80px)] transition-all duration-300 ease top-[80px] -left-[100%]', {'left-0': isVisible !== undefined ? isVisible : isMenuVisible})}>
 					<div
 							ref={ref}
 							className={cn('max-w-[360px] w-full h-full  flex flex-col justify-between ', className, )}>

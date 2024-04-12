@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {User} from "./types.ts";
 
-interface state {
+interface State {
 	user: User | null
 }
 
-const initialState: state = {
+const initialState: State = {
 	user: null
 }
 
@@ -20,7 +20,11 @@ const userSlice = createSlice({
 			state.user = null
 		}
 	},
+	selectors: {
+		getUser: state => state.user
+	}
 })
 
 export const {  addUser, deleteUser } = userSlice.actions
+export const {getUser} = userSlice.selectors
 export default userSlice.reducer

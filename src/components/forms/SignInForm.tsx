@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import {useSignInMutation} from "../../store/auth/authApi.ts";
 import {FormEvent} from "react";
-import {showEerror} from "../../utils/showError.ts";
+import {showError} from "../../utils/showError.ts";
 import {Button} from "../ui/Button.tsx";
 
 export const SignInForm = () =>  {
@@ -17,7 +17,7 @@ export const SignInForm = () =>  {
 			await signIn(data).unwrap()
 			form.reset()
 		} catch (e) {
-				showEerror(e)
+				showError(e)
 		}
 	}
 

@@ -48,7 +48,7 @@ export const Header = ({className}: Props) => {
 						<Button variant='clear'>
 							<img className='size-5' src={searchIcon} alt="Search"/>
 						</Button>
-							<Link to={'/favorites'}>
+							<Link to={'/favorites'} className="text-white">
 								<svg className='stroke-black' width={20} height={20}>
 									<use xlinkHref={`${sprites}#hearth`}/>
 								</svg>

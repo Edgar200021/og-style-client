@@ -2,57 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 @layer utilities {
-	.container {
-		@apply px-4 lg:px-[30px] 2xl:px-[100px] max-w-[1720px] mx-auto
-	}
+  .container {
+    @apply px-4 lg:px-[30px] 2xl:px-[100px] max-w-[1720px] mx-auto;
+  }
 }
 
 @layer base {
-	@font-face {
-		font-family: 'Inter';
-		font-style: normal;
-		font-weight: 400;
-		font-display: swap;
-		src: url("./assets/fonts/Inter-Regular.woff2") format('woff2');
-	}
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./assets/fonts/Inter-Regular.woff2') format('woff2');
+  }
 
-	@font-face {
-		font-family: 'Inter';
-		font-style: normal;
-		font-weight: 500;
-		font-display: swap;
-		src: url("./assets/fonts/Inter-Medium.woff2") format('woff2');
-	}
+  .swiper-pagination-bullet {
+    border: 1px solid #716969;
+  }
 
-	@font-face {
-		font-family: 'Inter';
-		font-style: normal;
-		font-weight: 600;
-		font-display: swap;
-		src: url("./assets/fonts/Inter-SemiBold.woff2") format('woff2');
-	}
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('./assets/fonts/Inter-Medium.woff2') format('woff2');
+  }
 
-	@font-face {
-		font-family: 'Inter';
-		font-style: normal;
-		font-weight: 700;
-		font-display: swap;
-		src: url("./assets/fonts/Inter-Bold.woff2") format('woff2');
-	}
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('./assets/fonts/Inter-SemiBold.woff2') format('woff2');
+  }
 
-	@font-face {
-		font-family: 'Montserrat';
-		font-style: normal;
-		font-weight: 500;
-		font-display: swap;
-		src: url("./assets/fonts/Montserrat-Medium.woff2") format('woff2');
-	}
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('./assets/fonts/Inter-Bold.woff2') format('woff2');
+  }
 
-		html {
-			font-family: "Inter", system-ui, sans-serif;
-		}
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('./assets/fonts/Montserrat-Medium.woff2') format('woff2');
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
 }

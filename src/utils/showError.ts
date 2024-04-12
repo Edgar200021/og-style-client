@@ -1,6 +1,6 @@
 import {isApiError, isApiValidationError, isRtkResponse} from "./typeGuards.ts";
 import {toast} from 'react-hot-toast'
-export const showEerror = (err: unknown) => {
+export const showError = (err: unknown) => {
 
 	if (isRtkResponse(err)) {
 		if (isApiValidationError(err.data)) return

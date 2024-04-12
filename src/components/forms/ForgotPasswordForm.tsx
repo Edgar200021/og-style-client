@@ -1,7 +1,7 @@
 import {useForgotPasswordMutation} from "../../store/auth/authApi.ts";
 import {Button} from "../ui/Button.tsx";
 import {FormEvent} from "react";
-import {showEerror} from "../../utils/showError.ts";
+import {showError} from "../../utils/showError.ts";
 
 
 interface Props {
@@ -23,7 +23,7 @@ export const  ForgotPasswordForm = ({onSuccess}: Props) =>  {
 			onSuccess(true)
 			form.reset()
 		} catch(e) {
-				showEerror(e)
+				showError(e)
 		}
 	}
 
