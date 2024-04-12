@@ -35,10 +35,10 @@ export const Product = ({
     >
       <div className="h-40 md:h-80 bg-[#f3f1f4] relative rounded-xl mb-[14px] md:mb-5 ">
         <Link
-          className="absolute h-full w-full inset-0 cursor-pointer "
+          className="absolute h-full w-full inset-0 cursor-pointer z-20 "
           to={`/products/${id}`}
         />
-        <div className="absolute right-[14px] top-[14px] md:right-[30px] md:top-[30px] flex items-center gap-x-4 z-10">
+        <div className="absolute right-[14px] top-[14px] md:right-[30px] md:top-[30px] flex items-center gap-x-4 z-30">
           <Button
             variant="clear"
             className="size-[18px] md:size-6 block text-gray-200 hover:text-red hover:[&>svg]:!stroke-red "
@@ -65,14 +65,14 @@ export const Product = ({
           modules={[Pagination]}
           navigation
           pagination={{ clickable: true }}
-          className="w-full h-full [&>span.swiper-pagination-bullet]:hidden"
+          className="w-full h-full [&>span.swiper-pagination-bullet]:hidden z-20"
         >
           {images.map(image => (
             <SwiperSlide key={image}>
               <img
                 src={image}
                 alt={name}
-                className="object-cover object-bottom w-full h-full rounded-xl"
+                className="object-cover object-bottom w-full h-full rounded-xl max-xsm:-translate-y-5"
               />
             </SwiperSlide>
           ))}
@@ -81,7 +81,7 @@ export const Product = ({
       <h3 className="text-sm md:text-xl mb-2 md:mb-3 text-dark tracking-[0.01em]">
         {name}
       </h3>
-      <div className="flex items-center mb-4 gap-x-2 md:gap-x-3 md:mb-0 ">
+      <div className="flex items-center mb-4 gap-x-2 md:gap-x-3 md:mb-0  ">
         {discount ? (
           <>
             <span className="font-bold text-sm text-black md:text-2xl md:font-semibold">

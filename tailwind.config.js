@@ -27,7 +27,8 @@ export default {
       },
       backgroundImage: {
         grad1: "radial-gradient(243.03% 191.83% at 102.27% -3.07%, rgb(110, 47, 158) 0%, rgb(142, 154, 225) 24.47916716337204%, rgb(221, 97, 175) 56.77083134651184%, rgb(238, 242, 168) 74.47916865348816%)",
-        grad2: "linear-gradient(244deg, #efefef 0%, #cb9a63 29.17%, #d76598 42.71%, #46527f 56.77%, #1e9190 70.83%, #4a5976 86.46%, #5f3f6b 100%)"
+        grad2: "linear-gradient(244deg, #efefef 0%, #cb9a63 29.17%, #d76598 42.71%, #46527f 56.77%, #1e9190 70.83%, #4a5976 86.46%, #5f3f6b 100%)",
+		"grad-yellow": "linear-gradient(225deg, #fff385 2.97%, #fff0ba 100%)"
       },
       screens: {
         'xsm': '400px'
