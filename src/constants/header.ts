@@ -3,6 +3,7 @@ import whatsappIcon from '../assets/icons/whatsapp.svg'
 import telegramIcon from '../assets/icons/telegram.svg'
 import messageIcon from '../assets/icons/message.svg'
 import phoneIcon from '../assets/icons/phone.svg'
+
 export const CATEGORIES = [
 	{'label': "Кроссовки", to: "/products?category=обувь&subcategory=кроссовки"},
 	{'label': "Тапочки", to: "/products?category=обувь&subcategory=тапочки"},
@@ -21,5 +22,5 @@ export const NAVIGATION = [
 	{'label': "Оригинал 100%", to: "/original"},
 ]
 
-export const FEEDBACK = [ telegramIcon,messageIcon,phoneIcon]
+export const FEEDBACK = [ whatsappIcon, telegramIcon,messageIcon,phoneIcon]
 

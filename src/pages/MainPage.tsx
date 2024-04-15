@@ -73,7 +73,7 @@ export const MainPage = ({ className }: Props) => {
             />
           </li>
         </ul>
-        <Mailing />
+        <Mailing className="mb-20 md:mb-[140px] lg:mb-40" />
       </div>
     </main>
   )
