@@ -1,9 +1,10 @@
 import { baseApi } from '../baseApi'
 import {
   FilterProducts,
-  GetProductRequest,
+  GetProductFiltersResponse,
   GetProductResponse,
   GetProductsResponse,
+  Product,
 } from './types'
 
 export const productApi = baseApi.injectEndpoints({
@@ -15,12 +16,25 @@ export const productApi = baseApi.injectEndpoints({
       }),
     }),
 
-    getProduct: builder.query<GetProductResponse, GetProductRequest>({
+    getProduct: builder.query<GetProductResponse, number>({
       query: id => ({
         url: `/products/${id}`,
+      }),
+    }),
+
+    getProductFilters: builder.query<
+      GetProductFiltersResponse,
+      Product['category']
+    >({
+      query: category => ({
+        url: `/products/filters?category=${category}`,
       }),
     }),
   }),
 })
 
-export const { useGetProductsQuery, useGetProductQuery } = productApi
+export const {
+  useGetProductsQuery,
+  useGetProductQuery,
+  useGetProductFiltersQuery,
+} = productApi

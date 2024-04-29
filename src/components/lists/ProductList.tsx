@@ -21,7 +21,7 @@ export const ProductList = ({
   withSlider,
   title,
 }: Props) => {
-  const { data, isLoading, error } = useGetProductsQuery({
+  const { data, isLoading, isError } = useGetProductsQuery({
     limit: 16,
     ...filters,
   })

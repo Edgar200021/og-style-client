@@ -12,9 +12,10 @@ import {Collapsible} from "../Collapsible/Collapsible.tsx";
 
 interface Props {
 	email: string
+	token: string
 }
 
-export const ResetPasswordForm = ({email}: Props ) => {
+export const ResetPasswordForm = ({email, token}: Props ) => {
 	const {register, handleSubmit, formState: {errors}} = useForm<ResetPasswordSchema>({
 		resolver: zodResolver(resetPasswordSchema)
 	})
@@ -23,7 +24,7 @@ export const ResetPasswordForm = ({email}: Props ) => {
 
 	const onSubmit: SubmitHandler<ResetPasswordSchema> = async(data) => {
 		try {
-			await resetPassword({email, password: data.password}).unwrap()
+			await resetPassword({email, password: data.password, token}).unwrap()
 			toast.success('Сброс пароля прошла успешно')
 			navigate('/auth/sign-in')
 		} catch (e) {

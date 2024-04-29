@@ -1,5 +1,6 @@
 export interface ApiError extends Error{
-	status: "error"
+	//status: "error"
+	statusCode: number
 }
 
 export interface ApiValidationError extends Error {

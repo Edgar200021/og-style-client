@@ -1,20 +1,28 @@
-import {User} from "../user/types.ts";
-import {BaseApiResponse} from "../../types/types.ts";
+import { BaseApiResponse } from '../../types/types.ts'
+import { User } from '../user/types.ts'
 
-export interface SignUpRequst {
-	email: string
-	password: string
+export interface SignUpRequest {
+  email: string
+  password: string
 }
 
 export interface SignInRequest {
-	email: string
-	password: string
+  email: string
+  password: string
 }
 
+export interface GetGithubRedirectUrlResponse extends BaseApiResponse<string> {}
+export interface SignInGithubRequest {
+  code: string
+}
+
+export interface SignInGoogleRequest {
+	token: string
+}
 export interface ResetPasswordRequest {
-	email: string
-	password: string
+  email: string
+  password: string
+  token: string
 }
 
-export interface SignInResponse extends BaseApiResponse<User>{
-}
+export interface SignInResponse extends BaseApiResponse<User> {}
