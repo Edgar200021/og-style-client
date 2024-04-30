@@ -26,7 +26,9 @@ export const Oauth = ({ className }: Props) => {
   const onGithubSignIn = async () => {
     try {
       const { data } = await getGithubUrl(null)
-      window.location.replace(data!.data)
+      console.log(data)
+      window.location.href = data!.data
+      //  window.location.replace(data!.data)
     } catch (e) {
       console.log(e)
       showError(e)

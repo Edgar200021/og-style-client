@@ -1,4 +1,4 @@
-import { GithubAutorizePage } from '@/pages/GithubAuthorizePage.tsx'
+import { GithubAuthorizePage } from '@/pages/GithubAuthorizePage.tsx'
 import { createBrowserRouter } from 'react-router-dom'
 import { SignInForm } from '../components/forms/SignInForm.tsx'
 import { SignUpForm } from '../components/forms/SignUpForm.tsx'
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         path: 'reset-password',
       },
       {
-        element: <GithubAutorizePage />,
+        element: <GithubAuthorizePage />,
         path: 'github',
       },
     ],

@@ -17,7 +17,7 @@ export interface SignInGithubRequest {
 }
 
 export interface SignInGoogleRequest {
-	token: string
+  token: string
 }
 export interface ResetPasswordRequest {
   email: string

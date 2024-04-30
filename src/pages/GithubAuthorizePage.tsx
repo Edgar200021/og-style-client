@@ -4,11 +4,11 @@ import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-export const GithubAutorizePage = () => {
+export const GithubAuthorizePage = () => {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
   const navigate = useNavigate()
-  const [githubSignin, { isLoading }] = useSignInGithubMutation()
+  const [githubSignIn, { isLoading }] = useSignInGithubMutation()
 
   useEffect(() => {
     if (!code) {
@@ -17,19 +17,17 @@ export const GithubAutorizePage = () => {
       return
     }
 
-    ;(async () => {
+    const cb = async () => {
       try {
-        await githubSignin({ code }).unwrap()
-
-        //TODO:
-        //navigate('/')
+        await githubSignIn({ code }).unwrap()
+        navigate('/')
       } catch (error) {
         showError(error)
       }
-    })()
+    }
 
-    console.log('')
-  }, [code, githubSignin])
+    cb()
+  }, [code, githubSignIn])
 
   return <h1>ok</h1>
 }
