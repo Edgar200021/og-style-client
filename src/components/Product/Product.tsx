@@ -29,7 +29,7 @@ export const Product = ({
   return (
     <article
       className={cn(
-        'w-full min-w-[140px] max-md:max-w-[300px] md:max-w-[390px] lg:max-w-[410px] ',
+        'w-full min-w-[140px] max-md:max-w-[300px] md:max-w-[320px]  ',
         className
       )}
     >
@@ -72,7 +72,7 @@ export const Product = ({
               <img
                 src={image}
                 alt={name}
-                className="object-cover object-bottom w-full h-full rounded-xl max-xsm:-translate-y-5"
+                className="object-cover object-bottom w-full h-full rounded-xl "
               />
             </SwiperSlide>
           ))}

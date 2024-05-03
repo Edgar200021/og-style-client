@@ -7,6 +7,7 @@ import { cn } from '../../utils/cn'
 import { Product } from '../Product/Product'
 import { Button } from '../ui/Button'
 
+import { useQueryParams } from '@/hooks/useQueryParams'
 import slideArrowIcon from '../../assets/icons/sliderarrow.svg'
 
 interface Props {
@@ -21,13 +22,20 @@ export const ProductList = ({
   withSlider,
   title,
 }: Props) => {
+  const { queryParams } = useQueryParams(
+    'category',
+    'minPrice',
+    'maxPrice',
+    'brand',
+    'size',
+    'colors'
+  )
   const { data, isLoading, isError } = useGetProductsQuery({
     limit: 16,
+    ...queryParams,
     ...filters,
   })
   const swiperRef = useRef<SwiperClass>()
-
-  console.log(data)
 
   if (!data) return null
   if (isLoading) return <h1>Loading...</h1>
@@ -98,10 +106,13 @@ export const ProductList = ({
 
   return (
     <ul
-      className={cn('flex flex-wrap gap-4 md:gap-5 ', className)}
+      className={cn(
+        'grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-5',
+        className
+      )}
     >
       {data.data.products.map(product => (
-        <Product className="grow basis-80" key={product.id} {...product} />
+        <Product key={product.id} {...product} />
       ))}
     </ul>
   )

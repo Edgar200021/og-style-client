@@ -22,11 +22,11 @@ export interface FilterProducts extends BaseSearchParams {
   name: string
   category: string
   subCategory: string
-  brand: number
-  size: string[]
-  colors: string[]
-  minPrice: number
-  maxPrice: number
+  brand: string
+  size: string
+  colors: string
+  minPrice: string
+  maxPrice: string
 }
 
 export interface GetProductResponse extends BaseApiResponse<Product> {}

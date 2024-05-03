@@ -35,7 +35,8 @@ export const MobileMenu = ({ className, isVisible }: Props) => {
         className={cn(
           'md:hidden h-4 w-6 cursor-pointer flex items-center justify-center relative before:absolute before:top-0 before:left-0 before:bg-black before:content-[""] before:w-full before:h-[2px]  after:absolute after:bottom-0 after:left-0 after:bg-black after:content-[""] after:w-full after:h-[2px] before:transition-all before:duration-300 before:ease after:transition-all after:duration-300 after:ease',
           {
-            'before:rotate-45 before:top-[50%] before:-translate-y-[50%] after:-rotate-45 after:top-[50%] after:-translate-y-[50%] ': isVisible ?? isMenuVisible
+            'before:rotate-45 before:top-[50%] before:-translate-y-[50%] after:-rotate-45 after:top-[50%] after:-translate-y-[50%] ':
+              isVisible ?? isMenuVisible,
           }
         )}
       >
@@ -60,7 +61,7 @@ export const MobileMenu = ({ className, isVisible }: Props) => {
             className
           )}
         >
-          <div className="px-4 bg-white">
+          <div className="px-4 bg-white h-full">
             <div className="pb-3 mb-6 border-b-[1px] border-b-gray-300 text-dark text-sm flex items-center justify-between gap-x-2">
               <a
                 className="flex items-center gap-x-[6px] justify-between "

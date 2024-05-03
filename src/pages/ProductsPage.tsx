@@ -11,7 +11,7 @@ export const ProductsPage = ({ className }: Props) => {
     <main className={cn('', className)}>
       <div className="container">
         <ProductFilters />
-        <ProductList filters={{ limit: 9 }} />
+        <ProductList filters={{ limit: 12 }} />
       </div>
     </main>
   )

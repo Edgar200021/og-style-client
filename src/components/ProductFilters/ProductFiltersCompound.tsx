@@ -180,14 +180,26 @@ const Price = ({
 
   return (
     <div className={cn('', className)}>
+      <div className="flex items-center justify-between gap-x-5 translate-y-2">
+        <label className="py-2 px-4 flex items-center  border-[1px] border-gray rounded-lg  text-dark w-[45%] gap-x-1">
+          <span className="text-gray-500">от</span>
+          {price[0]} ₽
+        </label>
+
+        <label className="py-2 px-4 flex items-center border-[1px] border-gray rounded-lg text-dark p-0 w-[45%] gap-x-1">
+          <span className="text-gray-500">до</span>
+          {price[1]} ₽
+        </label>
+      </div>
       <ReactSlider
         onChange={value => setPrice([value[0], value[1]])}
-        className="horizontal-slider"
+        className="horizontal-slider "
         thumbClassName="example-thumb"
         trackClassName="example-track"
         defaultValue={price}
         max={max_price}
         min={min_price}
+        value={price}
         ariaLabel={['Lower thumb', 'Upper thumb']}
         ariaValuetext={state => `Thumb value ${state.valueNow}`}
         renderThumb={props => (
