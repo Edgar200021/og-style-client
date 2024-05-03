@@ -39,7 +39,7 @@ const Brands = ({
   const [brand, setBrand] = useState<string[]>(initialValue)
 
   useEffect(() => {
-    if (!setValue || !brand.length) return
+    if (!setValue) return
     onChange<string[]>(brand)
   }, [setValue, brand])
 
@@ -124,7 +124,7 @@ const Colors = ({
   const [color, setColor] = useState<string[]>(initialValue)
 
   useEffect(() => {
-    if (!setValue || !color.length) return
+    if (!setValue) return
     onChange<string[]>(color)
   }, [setValue, color])
 

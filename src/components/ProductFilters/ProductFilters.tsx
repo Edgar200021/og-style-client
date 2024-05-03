@@ -56,41 +56,40 @@ export const ProductFilters = ({ className, category }: Props) => {
   useOnClickOutside(ref, () => setIsOpened(false))
 
   useEffect(() => {
-    const entries = Object.entries(filters).filter(
-      ([_, value]) => !!value.length
-    )
-
-    if (!entries.length || (receiveValue && !entries.length)) {
-      setIsOpened(false)
-      setReceiveValue(false)
-      return
-    }
-
     const filtersFromCache = get()
 
     if (filtersFromCache && _.isEqual(filtersFromCache, filters)) {
+      console.log('ok')
       setIsOpened(false)
       setReceiveValue(false)
       return
     }
 
-    entries.forEach(([key, value]) => {
+    Object.entries(filters).forEach(([key, value]) => {
       if (key === 'price') {
-        console.log(value)
-        setQueryParams('minPrice', value[0] as string)
-        setQueryParams('maxPrice', value[1] as string)
+        setQueryParams('minPrice', (value[0] as string) ?? '')
+        setQueryParams('maxPrice', (value[1] as string) ?? '')
       }
 
       if (key === 'brand' || key === 'colors' || key === 'size') {
-        setQueryParams(key, value.join(','))
+        setQueryParams(key, value?.join(',') ?? '')
       }
     })
 
     setReceiveValue(false)
     setIsOpened(false)
     set(filters)
-  }, [filters, receiveValue])
+  }, [filters])
 
+
+
+  
+  if (isLoading)
+    return (
+      <span className="rounded-lg bg-black p-2 text-white flex items-center justify-center max-w-[200px]">
+        Загружаем фильтры...
+      </span>
+    )
   if (!data || isError) return null
 
   return (

@@ -24,6 +24,7 @@ export const ProductList = ({
 }: Props) => {
   const { queryParams } = useQueryParams(
     'category',
+    'subCategory',
     'minPrice',
     'maxPrice',
     'brand',
@@ -107,7 +108,7 @@ export const ProductList = ({
   return (
     <ul
       className={cn(
-        'grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-5',
+        'grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 md:gap-5',
         className
       )}
     >
