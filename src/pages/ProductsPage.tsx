@@ -1,3 +1,4 @@
+import { ProductList } from '@/components/lists/ProductList'
 import { ProductFilters } from '../components/ProductFilters/ProductFilters'
 import { cn } from '../utils/cn'
 
@@ -10,6 +11,7 @@ export const ProductsPage = ({ className }: Props) => {
     <main className={cn('', className)}>
       <div className="container">
         <ProductFilters />
+        <ProductList filters={{ limit: 9 }} />
       </div>
     </main>
   )

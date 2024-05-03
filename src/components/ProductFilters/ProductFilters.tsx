@@ -1,32 +1,97 @@
+import { useOnClickOutside } from 'usehooks-ts'
 import { useQueryParams } from '../../hooks/useQueryParams'
 import { useGetProductFiltersQuery } from '../../store/product/productApi'
 import { Product } from '../../store/product/types'
 import { Button } from '../ui/Button'
+import './slider.css'
 
-import { useRef, useState } from 'react'
-import { useOnClickOutside } from 'usehooks-ts'
+import { cache } from '@/utils/cache'
+import _ from 'lodash'
+import { useEffect, useRef, useState } from 'react'
 import arrowIcon from '../../assets/icons/arrow.svg'
 import { PRODUCT_FILTER_LABELS } from '../../constants/productFilters'
 import { cn } from '../../utils/cn'
 import { Collapsible } from '../Collapsible/Collapsible'
 import { CloseIcon } from '../ui/CloseIcon'
-import { Input } from '../ui/Input'
+import { ProductFiltersCompound } from './ProductFiltersCompound'
 
 interface Props {
   className?: string
   category?: Product['category']
 }
 
+const PRODUCT_FILTERS_KEY = 'productFilters'
+const { set, get } = cache(PRODUCT_FILTERS_KEY)
+
 export const ProductFilters = ({ className, category }: Props) => {
-  const { queryParams, setQueryParams } = useQueryParams('category')
+  const { queryParams, setQueryParams } = useQueryParams(
+    'category',
+    'minPrice',
+    'maxPrice',
+    'brand',
+    'size',
+    'colors'
+  )
   const { data, isLoading, isError } = useGetProductFiltersQuery(
     (category || queryParams.category) as Product['category']
   )
+
+  const [receiveValue, setReceiveValue] = useState(false)
+  const [filters, setFilters] = useState<{
+    brand: string[]
+    size: string[]
+    price: number[]
+    colors: string[]
+  }>({
+    brand: queryParams['brand'] ? queryParams['brand'].split(',') : [],
+    size: queryParams['size'] ? queryParams['size'].split(',') : [],
+    price:
+      queryParams['maxPrice'] && queryParams['minPrice']
+        ? [Number(queryParams['minPrice']), Number(queryParams['maxPrice'])]
+        : [],
+    colors: queryParams['colors'] ? queryParams['colors'].split(',') : [],
+  })
   const [isOpened, setIsOpened] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   useOnClickOutside(ref, () => setIsOpened(false))
 
-  if (!data) return null
+  useEffect(() => {
+    const entries = Object.entries(filters).filter(
+      ([_, value]) => !!value.length
+    )
+
+    if (!entries.length || (receiveValue && !entries.length)) {
+      setIsOpened(false)
+      setReceiveValue(false)
+      return
+    }
+
+    const filtersFromCache = get()
+
+    if (filtersFromCache && _.isEqual(filtersFromCache, filters)) {
+      setIsOpened(false)
+      setReceiveValue(false)
+      return
+    }
+
+    entries.forEach(([key, value]) => {
+      if (key === 'price') {
+        console.log(value)
+        setQueryParams('minPrice', value[0] as string)
+        setQueryParams('maxPrice', value[1] as string)
+      }
+
+      if (key === 'brand' || key === 'colors' || key === 'size') {
+        setQueryParams(key, value.join(','))
+      }
+    })
+
+    setReceiveValue(false)
+    setIsOpened(false)
+    set(filters)
+  }, [filters, receiveValue])
+
+  if (!data || isError) return null
 
   return (
     <>
@@ -57,8 +122,8 @@ export const ProductFilters = ({ className, category }: Props) => {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-y-5">
-            {Object.entries(data.data).map(([key, value]) => {
+          <div className="flex flex-col gap-y-5 ">
+            {Object.entries(data.data).map(([key]) => {
               const label = PRODUCT_FILTER_LABELS[key]
               if (!label) return null
 
@@ -76,24 +141,70 @@ export const ProductFilters = ({ className, category }: Props) => {
                     </Button>
                   )}
                 >
-                  {key === 'size' && (
-                    <div className="flex flex-wrap pr-6 gap-4 max-h-[100px] overflow-y-auto">
-                      {value.map((v: string) => (
-                        <label
-                          key={v}
-                          className="cursor-pointer py-[9px] px-4 rounded-xl bg-gray-200"
-                        >
-                          <Input type="checkbox" className="hidden" />
-                          {v}
-                        </label>
-                      ))}
-                    </div>
-                  )}
+                  <ProductFiltersCompound filters={data.data}>
+                    {key === 'size' && (
+                      <ProductFiltersCompound.Size
+                        initialValue={filters.size}
+                        className="max-h-[100px] overflow-y-auto"
+                        setValue={receiveValue}
+                        onChange={size =>
+                          setFilters(prev => ({
+                            ...prev,
+                            size: size as string[],
+                          }))
+                        }
+                      />
+                    )}
+
+                    {key === 'min_price' && (
+                      <ProductFiltersCompound.Price
+                        initialValue={filters.price as [number, number]}
+                        className="-translate-y-2"
+                        setValue={receiveValue}
+                        onChange={value =>
+                          setFilters(prev => ({
+                            ...prev,
+                            price: value as number[],
+                          }))
+                        }
+                      />
+                    )}
+
+                    {key === 'brands' && (
+                      <ProductFiltersCompound.Brands
+                        initialValue={filters.brand}
+                        className="max-h-[200px] overflow-y-auto"
+                        setValue={receiveValue}
+                        onChange={value =>
+                          setFilters(prev => ({
+                            ...prev,
+                            brand: value as string[],
+                          }))
+                        }
+                      />
+                    )}
+
+                    {key === 'colors' && (
+                      <ProductFiltersCompound.Colors
+                        initialValue={filters.colors}
+                        className=" max-h-[160px] overflow-y-auto"
+                        setValue={receiveValue}
+                        onChange={value =>
+                          setFilters(prev => ({
+                            ...prev,
+                            colors: value as string[],
+                          }))
+                        }
+                      />
+                    )}
+                  </ProductFiltersCompound>
                 </Collapsible>
               )
             })}
           </div>
-          <Button className="mt-auto">Показать</Button>
+          <Button onClick={() => setReceiveValue(true)} className="mt-auto">
+            Показать
+          </Button>
         </div>
       </div>
     </>

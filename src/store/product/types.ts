@@ -7,15 +7,17 @@ export interface Product {
   price: number
   discountedPrice?: number
   discount?: number
-  images: string[]
-  size: string[]
   category: 'обувь' | 'одежда'
   subCategory: string
   materials: string[]
   colors: string[]
+  images: string[]
+  size: string[]
+  brandId: number
 }
 
-export interface GetProductsResponse extends BaseApiResponse<Product[]> {}
+export interface GetProductsResponse
+  extends BaseApiResponse<{ totalPages: number; products: Product[] }> {}
 export interface FilterProducts extends BaseSearchParams {
   name: string
   category: string
@@ -35,10 +37,9 @@ export interface GetProductRequest {
 export interface ProductFilters {
   size: string[]
   colors: string[]
-  minPrice: number
-  maxPrice: number
-  brandsId: number[]
-  brandsName: string[]
+  min_price: number
+  max_price: number
+  brands: string[]
 }
 
 export interface GetProductFiltersResponse

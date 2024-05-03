@@ -10,7 +10,7 @@ import { Button } from '../ui/Button'
 import slideArrowIcon from '../../assets/icons/sliderarrow.svg'
 
 interface Props {
-  filters?: FilterProducts
+  filters?: Partial<FilterProducts>
   className?: string
   withSlider?: boolean
   title?: string
@@ -26,6 +26,8 @@ export const ProductList = ({
     ...filters,
   })
   const swiperRef = useRef<SwiperClass>()
+
+  console.log(data)
 
   if (!data) return null
   if (isLoading) return <h1>Loading...</h1>
@@ -84,7 +86,7 @@ export const ProductList = ({
             },
           }}
         >
-          {data.data.map(product => (
+          {data.data.products.map(product => (
             <SwiperSlide key={product.id}>
               <Product className="grow" {...product} />
             </SwiperSlide>
@@ -96,10 +98,10 @@ export const ProductList = ({
 
   return (
     <ul
-      className={cn('flex flex-wrap gap-4 md:gap-5 justify-center', className)}
+      className={cn('flex flex-wrap gap-4 md:gap-5 ', className)}
     >
-      {data.data.map(product => (
-        <Product className="grow" key={product.id} {...product} />
+      {data.data.products.map(product => (
+        <Product className="grow basis-80" key={product.id} {...product} />
       ))}
     </ul>
   )

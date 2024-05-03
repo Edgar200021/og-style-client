@@ -1,6 +1,6 @@
 export const PRODUCT_FILTER_LABELS = {
   size: 'Размер',
-  minPrice: 'Цена',
-  brandsName: 'Бренд',
+  min_price: 'Цена',
+  brands: 'Бренд',
   colors: 'Цвет',
 }
