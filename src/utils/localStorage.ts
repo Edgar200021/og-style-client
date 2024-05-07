@@ -1,7 +1,6 @@
 export const localStorageApi = () => {
   const get = <T>(key: string) => {
     const value = localStorage.getItem(key)
-    console.log(value)
 
     return value ? (JSON.parse(value) as T) : null
   }

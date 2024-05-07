@@ -12,15 +12,10 @@ interface Props extends IProduct {
   className?: string
 }
 
-import {
-  addFavoriteProduct,
-  getFavoriteProduct,
-} from '@/store/product/productSlice'
-import { useAppDispatch, useAppSelector } from '@/store/store'
 import { Link } from 'react-router-dom'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import sprites from '../../assets/icons/sprite.svg'
+import { ProductFavoriteBtn } from '../ProductFavoriteBtn/ProductFavoriteBtn'
 
 export const Product = ({
   className,
@@ -31,15 +26,6 @@ export const Product = ({
   discount,
   id,
 }: Props) => {
-  const favoriteProduct = useAppSelector(state => getFavoriteProduct(state, id))
-  const dispatch = useAppDispatch()
-
-  const onClickFavorite = () => {
-    dispatch(
-      addFavoriteProduct({ id, discount, discountedPrice, images, name, price })
-    )
-  }
-
   return (
     <article
       className={cn(
@@ -52,36 +38,15 @@ export const Product = ({
           className="absolute h-full w-full inset-0 cursor-pointer z-20 "
           to={`/products/${id}`}
         />
-        <div className="absolute right-[14px] top-[14px] md:right-[30px] md:top-[30px] flex items-center gap-x-4 z-30">
-          <Button
-            onClick={onClickFavorite}
-            variant="clear"
-            className={cn(
-              'size-[18px] md:size-6 block text-gray-200 hover:text-red hover:[&>svg]:!stroke-red ',
-              {
-                'text-red': !!favoriteProduct,
-              }
-            )}
-          >
-            <svg
-              className={cn(
-                'w-full h-full !stroke-black transition-all duration-300 ease',
-                {
-                  '!stroke-none': !!favoriteProduct,
-                }
-              )}
-            >
-              <use xlinkHref={`${sprites}#hearth`} />
-            </svg>
-          </Button>
-          {/*<Button
-            variant="clear"
-            className="size-[18px] md:size-6 hidden md:block text-gray-200 "
-          >
-            <svg className="w-full h-full !stroke-black">
-              <use xlinkHref={`${sprites}#bug`} />
-            </svg>
-          </Button>*/}
+        <div className="absolute right-[14px] top-[14px] md:right-[30px] md:top-[30px] z-30">
+          <ProductFavoriteBtn
+            id={id}
+            name={name}
+            images={images}
+            price={price}
+            discount={discount}
+            discountedPrice={discountedPrice}
+          />
         </div>
 
         <Swiper

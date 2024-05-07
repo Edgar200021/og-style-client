@@ -20,8 +20,6 @@ function App() {
         >[]
       >(FAVORITE_PRODUCTS_KEY) || []
 
-    console.log(favoriteProducts)
-
     dispatch(addMultiple(favoriteProducts))
   }, [])
 

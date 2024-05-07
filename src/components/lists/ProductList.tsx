@@ -18,12 +18,14 @@ interface Props {
   className?: string
   withSlider?: boolean
   title?: string
+  withPagination?: boolean
 }
 export const ProductList = ({
   filters,
   className,
   withSlider,
   title,
+  withPagination,
 }: Props) => {
   const { queryParams } = useQueryParams(
     'category',
@@ -47,6 +49,7 @@ export const ProductList = ({
       pollingInterval: 1000 * 60 * 60,
     }
   )
+
   const swiperRef = useRef<SwiperClass>()
 
   if (isLoading) return <MainLoader className="max-w-fit mx-auto my-10" />
@@ -135,11 +138,13 @@ export const ProductList = ({
           ))}
         </ul>
       )}
-      <Paginate
-        className="self-center"
-        initialPage={queryParams.page ? Number(queryParams.page) : undefined}
-        totalPages={data.data.totalPages}
-      />
+      {withPagination && (
+        <Paginate
+          className="self-center"
+          initialPage={queryParams.page ? Number(queryParams.page) : undefined}
+          totalPages={data.data.totalPages}
+        />
+      )}
     </div>
   )
 }

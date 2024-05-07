@@ -16,6 +16,10 @@ export interface Product {
   brandId: number
 }
 
+export interface ProductWithBrand extends Product {
+  brand: string
+}
+
 export interface GetProductsResponse
   extends BaseApiResponse<{ totalPages: number; products: Product[] }> {}
 export interface FilterProducts extends BaseSearchParams {
@@ -29,7 +33,8 @@ export interface FilterProducts extends BaseSearchParams {
   maxPrice: string
 }
 
-export interface GetProductResponse extends BaseApiResponse<Product> {}
+export interface GetProductResponse
+  extends BaseApiResponse<ProductWithBrand> {}
 export interface GetProductRequest {
   id: Product['id']
 }

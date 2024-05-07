@@ -58,7 +58,6 @@ export const ProductFilters = ({ className, category }: Props) => {
     const filtersFromCache = get()
 
     if (filtersFromCache && _.isEqual(filtersFromCache, filters)) {
-      console.log('ok')
       setIsOpened(false)
       setReceiveValue(false)
       return
