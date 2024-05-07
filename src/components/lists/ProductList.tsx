@@ -9,6 +9,9 @@ import { Button } from '../ui/Button'
 
 import { useQueryParams } from '@/hooks/useQueryParams'
 import slideArrowIcon from '../../assets/icons/sliderarrow.svg'
+import { Paginate } from '../Paginate/Paginate'
+import { MainLoader } from '../ui/loaders/MainLoader'
+import { ProductSkeleton } from '../ui/skeletons/ProductSkeleton'
 
 interface Props {
   filters?: Partial<FilterProducts>
@@ -29,17 +32,25 @@ export const ProductList = ({
     'maxPrice',
     'brand',
     'size',
-    'colors'
+    'colors',
+    'page'
   )
-  const { data, isLoading, isError } = useGetProductsQuery({
-    limit: 16,
-    ...queryParams,
-    ...filters,
-  })
+
+  const { data, isLoading, isError, isFetching } = useGetProductsQuery(
+    {
+      limit: 16,
+      ...queryParams,
+      ...(queryParams.page && { page: Number(queryParams.page) }),
+      ...filters,
+    },
+    {
+      pollingInterval: 1000 * 60 * 60,
+    }
+  )
   const swiperRef = useRef<SwiperClass>()
 
+  if (isLoading) return <MainLoader className="max-w-fit mx-auto my-10" />
   if (!data) return null
-  if (isLoading) return <h1>Loading...</h1>
 
   if (withSlider) {
     return (
@@ -106,15 +117,29 @@ export const ProductList = ({
   }
 
   return (
-    <ul
-      className={cn(
-        'grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 md:gap-5',
-        className
+    <div className="flex flex-col gap-y-12">
+      {isFetching ? (
+        <ProductSkeleton
+          className="grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 md:gap-5"
+          quantity={Number(filters?.limit) || 16}
+        />
+      ) : (
+        <ul
+          className={cn(
+            'grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 md:gap-5',
+            className
+          )}
+        >
+          {data.data.products.map(product => (
+            <Product key={product.id} {...product} />
+          ))}
+        </ul>
       )}
-    >
-      {data.data.products.map(product => (
-        <Product key={product.id} {...product} />
-      ))}
-    </ul>
+      <Paginate
+        className="self-center"
+        initialPage={queryParams.page ? Number(queryParams.page) : undefined}
+        totalPages={data.data.totalPages}
+      />
+    </div>
   )
 }

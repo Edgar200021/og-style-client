@@ -1,5 +1,5 @@
 import { FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSignInMutation } from '../../store/auth/authApi.ts'
 import { showError } from '../../utils/showError.ts'
 import { Oauth } from '../Oauth/Oauth.tsx'
@@ -7,6 +7,7 @@ import { Button } from '../ui/Button.tsx'
 
 export const SignInForm = () => {
   const [signIn, { isLoading }] = useSignInMutation()
+  const navigate = useNavigate()
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -17,6 +18,7 @@ export const SignInForm = () => {
     try {
       await signIn(data).unwrap()
       form.reset()
+      navigate('/')
     } catch (e) {
       console.log(e)
       showError(e)

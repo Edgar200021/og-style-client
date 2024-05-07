@@ -12,6 +12,11 @@ interface Props extends IProduct {
   className?: string
 }
 
+import {
+  addFavoriteProduct,
+  getFavoriteProduct,
+} from '@/store/product/productSlice'
+import { useAppDispatch, useAppSelector } from '@/store/store'
 import { Link } from 'react-router-dom'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -26,6 +31,15 @@ export const Product = ({
   discount,
   id,
 }: Props) => {
+  const favoriteProduct = useAppSelector(state => getFavoriteProduct(state, id))
+  const dispatch = useAppDispatch()
+
+  const onClickFavorite = () => {
+    dispatch(
+      addFavoriteProduct({ id, discount, discountedPrice, images, name, price })
+    )
+  }
+
   return (
     <article
       className={cn(
@@ -40,21 +54,34 @@ export const Product = ({
         />
         <div className="absolute right-[14px] top-[14px] md:right-[30px] md:top-[30px] flex items-center gap-x-4 z-30">
           <Button
+            onClick={onClickFavorite}
             variant="clear"
-            className="size-[18px] md:size-6 block text-gray-200 hover:text-red hover:[&>svg]:!stroke-red "
+            className={cn(
+              'size-[18px] md:size-6 block text-gray-200 hover:text-red hover:[&>svg]:!stroke-red ',
+              {
+                'text-red': !!favoriteProduct,
+              }
+            )}
           >
-            <svg className="w-full h-full !stroke-black transition-all duration-300 ease">
+            <svg
+              className={cn(
+                'w-full h-full !stroke-black transition-all duration-300 ease',
+                {
+                  '!stroke-none': !!favoriteProduct,
+                }
+              )}
+            >
               <use xlinkHref={`${sprites}#hearth`} />
             </svg>
           </Button>
-          <Button
+          {/*<Button
             variant="clear"
             className="size-[18px] md:size-6 hidden md:block text-gray-200 "
           >
             <svg className="w-full h-full !stroke-black">
               <use xlinkHref={`${sprites}#bug`} />
             </svg>
-          </Button>
+          </Button>*/}
         </div>
 
         <Swiper

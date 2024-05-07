@@ -20,8 +20,7 @@ interface Props {
   category?: Product['category']
 }
 
-const PRODUCT_FILTERS_KEY = 'productFilters'
-const { set, get } = cache(PRODUCT_FILTERS_KEY)
+const { set, get } = cache('productFilters')
 
 export const ProductFilters = ({ className, category }: Props) => {
   const { queryParams, setQueryParams } = useQueryParams(
@@ -81,9 +80,6 @@ export const ProductFilters = ({ className, category }: Props) => {
     set(filters)
   }, [filters])
 
-
-
-  
   if (isLoading)
     return (
       <span className="rounded-lg bg-black p-2 text-white flex items-center justify-center max-w-[200px]">

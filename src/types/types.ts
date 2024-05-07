@@ -9,6 +9,6 @@ export interface RtkApiResponse {
 }
 
 export interface BaseSearchParams {
-  page?: number
-  limit?: number
+  page?: number | string
+  limit?: number | string
 }

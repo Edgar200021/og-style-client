@@ -1,0 +1,1 @@
+export const FAVORITE_PRODUCTS_KEY = "favoriteProducts"
