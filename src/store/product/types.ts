@@ -33,8 +33,7 @@ export interface FilterProducts extends BaseSearchParams {
   maxPrice: string
 }
 
-export interface GetProductResponse
-  extends BaseApiResponse<ProductWithBrand> {}
+export interface GetProductResponse extends BaseApiResponse<ProductWithBrand> {}
 export interface GetProductRequest {
   id: Product['id']
 }

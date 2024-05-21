@@ -1,5 +1,6 @@
-import { SingleProduct } from '@/components/SingleProduct/SingleProduct.tsx'
+import { CartPage } from '@/pages/CartPage.tsx'
 import { GithubAuthorizePage } from '@/pages/GithubAuthorizePage.tsx'
+import { SingleProductPage } from '@/pages/SingleProductPage.tsx'
 import { createBrowserRouter } from 'react-router-dom'
 import { SignInForm } from '../components/forms/SignInForm.tsx'
 import { SignUpForm } from '../components/forms/SignUpForm.tsx'
@@ -9,7 +10,6 @@ import { ForgotPasswordPage } from '../pages/ForgotPasswordPage.tsx'
 import { MainPage } from '../pages/MainPage.tsx'
 import { ProductsPage } from '../pages/ProductsPage.tsx'
 import ResetPasswordPage from '../pages/ResetPasswordPage.tsx'
-import { SingleProductPage } from '@/pages/SingleProductPage.tsx'
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: 'products/:id',
         element: <SingleProductPage />,
+      },
+      {
+        path: 'cart',
+        element: <CartPage />,
       },
     ],
   },

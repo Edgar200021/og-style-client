@@ -16,9 +16,7 @@ export const authApi = baseApi.injectEndpoints({
     signUp: builder.mutation<BaseApiResponse<string>, SignUpRequest>({
       query: body => ({
         url: '/auth/sign-up',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
         method: 'POST',
         body,
       }),
@@ -27,9 +25,7 @@ export const authApi = baseApi.injectEndpoints({
     signIn: builder.mutation<SignInResponse, SignInRequest>({
       query: body => ({
         url: '/auth/sign-in',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
         method: 'POST',
         body,
       }),
@@ -48,9 +44,7 @@ export const authApi = baseApi.injectEndpoints({
     signInGithub: builder.mutation<string, SignInGithubRequest>({
       query: body => ({
         url: '/auth/github',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
         method: 'POST',
         body,
       }),
@@ -63,9 +57,7 @@ export const authApi = baseApi.injectEndpoints({
     signInGoogle: builder.mutation<SignInResponse, SignInGoogleRequest>({
       query: body => ({
         url: '/auth/google',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
         method: 'POST',
         body,
       }),
@@ -78,9 +70,7 @@ export const authApi = baseApi.injectEndpoints({
     logout: builder.mutation<BaseApiResponse<string>, null>({
       query: body => ({
         url: '/auth/logout',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
         method: 'POST',
         body,
       }),
@@ -92,9 +82,7 @@ export const authApi = baseApi.injectEndpoints({
     >({
       query: body => ({
         url: '/auth/forgot-password',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
         method: 'POST',
         body,
       }),
@@ -106,9 +94,7 @@ export const authApi = baseApi.injectEndpoints({
     >({
       query: ({ email, password, token }) => ({
         url: `/auth/reset-password`,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
         method: 'PATCH',
         body: { password, email, token },
       }),

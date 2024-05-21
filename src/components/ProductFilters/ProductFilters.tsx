@@ -22,7 +22,7 @@ interface Props {
 
 const { set, get } = cache('productFilters')
 
-export const ProductFilters = ({ className, category }: Props) => {
+export const ProductFilters = ({  category }: Props) => {
   const { queryParams, setQueryParams } = useQueryParams(
     'category',
     'minPrice',
@@ -52,7 +52,11 @@ export const ProductFilters = ({ className, category }: Props) => {
   })
   const [isOpened, setIsOpened] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  useOnClickOutside(ref, () => setIsOpened(false))
+  useOnClickOutside(ref, () => {
+    setIsOpened(false)
+  document.body.style.overflow = "auto"
+  }
+)
 
   useEffect(() => {
     const filtersFromCache = get()
@@ -90,7 +94,10 @@ export const ProductFilters = ({ className, category }: Props) => {
   return (
     <>
       <Button
-        onClick={() => setIsOpened(!isOpened)}
+        onClick={() => {
+          setIsOpened(true)
+          document.body.style.overflow = "hidden"
+        }}
         className="flex items-center gap-x-1 text-gray-500 tracking-[0.01em] text-base"
         variant="clear"
       >
@@ -111,7 +118,10 @@ export const ProductFilters = ({ className, category }: Props) => {
         >
           <div className="flex items-center justify-between ">
             <span className="text-black text-2xl">Фильтры</span>
-            <Button onClick={() => setIsOpened(false)} variant="clear">
+            <Button onClick={() => {
+              setIsOpened(false)
+              document.body.style.overflow = "auto"
+            }} variant="clear">
               <CloseIcon />
             </Button>
           </div>

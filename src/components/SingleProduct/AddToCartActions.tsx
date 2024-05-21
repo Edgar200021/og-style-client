@@ -28,8 +28,6 @@ export const AddToCartActions = ({
     size: '',
   })
 
-  console.log(price)
-  console.log(discountedPrice)
 
   const onAddToCart = () => {
     if (!characteristics.color || !characteristics.size) {

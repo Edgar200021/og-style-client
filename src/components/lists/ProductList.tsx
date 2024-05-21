@@ -127,7 +127,7 @@ export const ProductList = ({
           quantity={Number(filters?.limit) || 16}
         />
       ) : (
-        <ul
+        <div
           className={cn(
             'grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 md:gap-5',
             className
@@ -136,7 +136,7 @@ export const ProductList = ({
           {data.data.products.map(product => (
             <Product key={product.id} {...product} />
           ))}
-        </ul>
+        </div>
       )}
       {withPagination && (
         <Paginate

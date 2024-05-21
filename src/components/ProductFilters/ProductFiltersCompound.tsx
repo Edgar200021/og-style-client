@@ -92,7 +92,9 @@ const Size = ({
       {size.map((v: string) => (
         <label
           key={v}
-          className="cursor-pointer py-[9px] px-4 rounded-xl bg-gray-200"
+          className={cn("cursor-pointer py-[9px] px-4 rounded-xl bg-gray-200 transition-colors duration-300 ease", {
+            "bg-black text-white": sizes.includes(v)
+          })}
         >
           <Input
             defaultChecked={sizes.includes(v)}

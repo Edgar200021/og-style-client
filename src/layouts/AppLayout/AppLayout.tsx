@@ -4,10 +4,12 @@ import { Header } from '../../components/Header/Header.tsx'
 
 export const AppLayout = () => {
   return (
-    <>
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-[100svh]">
       <Header className="mb-9" />
-      <Outlet />
+      <div>
+        <Outlet />
+      </div>
       <Footer />
-    </>
+    </div>
   )
 }
