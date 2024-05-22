@@ -1,6 +1,6 @@
 import { Brands } from '../components/Brands/Brands.tsx'
 import { Hero } from '../components/Hero/Hero.tsx'
-import { HonestMark } from '../components/HonstMark/HonestMark.tsx'
+import { HonestMark } from '../components/HonestMark/HonestMark.tsx'
 import { Sell } from '../components/Sell/Sell.tsx'
 import { ProductList } from '../components/lists/ProductList.tsx'
 import { Button } from '../components/ui/Button.tsx'

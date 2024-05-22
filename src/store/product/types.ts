@@ -31,6 +31,7 @@ export interface FilterProducts extends BaseSearchParams {
   colors: string
   minPrice: string
   maxPrice: string
+  search: string
 }
 
 export interface GetProductResponse extends BaseApiResponse<ProductWithBrand> {}

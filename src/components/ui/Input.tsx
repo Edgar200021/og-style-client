@@ -7,7 +7,7 @@ const variants = {
   clear: 'bg-none border-none',
   primary: '',
   search:
-    'placeholder:text-sm placeholder:text-gray-300 border-0 p-0 m-0 border-transparent focus:border-transparent focus:ring-0',
+    'placeholder:text-sm placeholder:text-dark border-0 p-0 m-0 border-transparent focus:border-transparent focus:ring-0 w-full ',
   transparent:
     'bg-white/0 rounded-xl border-[1px] border-gray-200 w-full placeholder:text-white focus:outline-0 focus:ring-0 px-6',
 }

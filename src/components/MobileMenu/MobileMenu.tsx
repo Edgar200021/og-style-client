@@ -1,14 +1,13 @@
 import { useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
-import { Input } from '../ui/Input.tsx'
-
 import { cn } from '../../utils/cn.ts'
 
 import { useOnClickOutside } from 'usehooks-ts'
 import arrowIcon from '../../assets/icons/arrow.svg'
 import sprites from '../../assets/icons/sprite.svg'
 import { CATEGORIES, NAVIGATION } from '../../constants/header.ts'
+import { Search } from '../Search/Search.tsx'
 
 interface Props {
   className?: string
@@ -83,7 +82,11 @@ export const MobileMenu = ({ className, isVisible }: Props) => {
               <span>Telegram</span>
             </div>
 
-            <Input className="mb-[62px]" variant="search" />
+            <Search
+              onActionEnd={closeMenu}
+              withButton={false}
+              className="mb-[62px]"
+            />
 
             <ul className=" max-h-[380px] overflow-y-auto flex flex-col gap-y-4 text-dark [&>li:not(:last-child)]:border-b-[1px] [&>li:not(:last-child)]:border-gray-300 b [&>li:not(:last-child)]:pb-[10px]">
               {CATEGORIES.map(({ label, to }) => (

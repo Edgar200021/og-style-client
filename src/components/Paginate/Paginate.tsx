@@ -13,7 +13,7 @@ interface Props {
 export const Paginate = ({ className, totalPages, initialPage }: Props) => {
   const { setQueryParams } = useQueryParams()
 
-  if (totalPages === 1) return null
+  if (totalPages <= 1) return null
 
   const onPageChange = ({ selected }: { selected: number }) => {
     setQueryParams('page', String(selected + 1))
@@ -28,8 +28,8 @@ export const Paginate = ({ className, totalPages, initialPage }: Props) => {
       onPageChange={onPageChange}
       initialPage={initialPage !== undefined ? initialPage - 1 : 0}
       pageCount={totalPages}
-    //  pageRangeDisplayed={1}
-	
+      //  pageRangeDisplayed={1}
+
       pageLinkClassName="w-full h-full flex items-center justify-center"
       pageClassName="size-10 border-[1px] border-solid borer-gray-300 rounded-lg transition-colors duration-300 ease"
       activeClassName="bg-dark text-white"

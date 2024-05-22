@@ -35,7 +35,9 @@ export const ProductList = ({
     'brand',
     'size',
     'colors',
-    'page'
+    'page',
+    'name',
+    'search'
   )
 
   const { data, isLoading, isError, isFetching } = useGetProductsQuery(
@@ -53,10 +55,10 @@ export const ProductList = ({
   const swiperRef = useRef<SwiperClass>()
 
   if (isLoading) return <MainLoader className="max-w-fit mx-auto my-10" />
-  if (!data) return null
+  if (!data || isError) return null
 
   if (withSlider) {
-    return (
+    return !data.data.products.length ? null : (
       <div className={cn('relative', className)}>
         <div className="flex justify-between gap-x-10 items-center mb-4 md:mb-8">
           {title && (
@@ -120,23 +122,31 @@ export const ProductList = ({
   }
 
   return (
-    <div className="flex flex-col gap-y-12">
+    <div className="flex flex-col">
       {isFetching ? (
         <ProductSkeleton
           className="grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 md:gap-5"
           quantity={Number(filters?.limit) || 16}
         />
       ) : (
-        <div
-          className={cn(
-            'grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 md:gap-5',
-            className
+        <>
+          {title && (
+            <h2 className=" text-black text-lg tracking-[0.01em] md:text-xl lg:text-2xl mb-4">
+              {title}
+            </h2>
           )}
-        >
-          {data.data.products.map(product => (
-            <Product key={product.id} {...product} />
-          ))}
-        </div>
+          <div
+            className={cn(
+              'grid max-[450px]:justify-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] min-[1000px]:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 md:gap-5',
+              className,
+              { 'mb-12': withPagination }
+            )}
+          >
+            {data.data.products.map(product => (
+              <Product key={product.id} {...product} />
+            ))}
+          </div>
+        </>
       )}
       {withPagination && (
         <Paginate
