@@ -1,5 +1,6 @@
 import { CartPage } from '@/pages/CartPage.tsx'
 import { GithubAuthorizePage } from '@/pages/GithubAuthorizePage.tsx'
+import { NotFoundPage } from '@/pages/NotFoundPage.tsx'
 import { SingleProductPage } from '@/pages/SingleProductPage.tsx'
 import { createBrowserRouter } from 'react-router-dom'
 import { SignInForm } from '../components/forms/SignInForm.tsx'
@@ -32,9 +33,12 @@ export const router = createBrowserRouter([
         path: 'cart',
         element: <CartPage />,
       },
+      {
+        path: '*',
+        element: <NotFoundPage className='mb-[140px] py-20' />,
+      },
     ],
   },
-
   {
     path: '/auth',
     children: [
@@ -64,4 +68,14 @@ export const router = createBrowserRouter([
     path: '/admin',
     element: <AdminLayout />,
   },
+  //  {
+  //    path: '*',
+  //    element: <AppLayout />,
+  //    children: [
+  //      {
+  //        index: true,
+  //        element: <NotFoundPage />,
+  //      },
+  //    ],
+  //  },
 ])

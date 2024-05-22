@@ -33,7 +33,7 @@ export const CartPage = ({ className }: Props) => {
             <h1 className="font-medium text-2xl mb-12  md:text-[32px] lg:text-[40px] lg:mb-20">
               Корзина
             </h1>
-            <div className="flex flex-col gap-y-28 items-start md:flex-row md:gap-y-0 md:gap-x-5">
+            <div className="flex flex-col gap-y-28 items-start min-[900px]:flex-row min-[900px]:gap-y-0 min-[900px]:gap-x-5">
               <CartProductList
                 className="w-full"
                 cartProducts={data.data.products}

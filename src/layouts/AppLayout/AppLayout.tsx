@@ -4,7 +4,7 @@ import { Header } from '../../components/Header/Header.tsx'
 
 export const AppLayout = () => {
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] min-h-[100svh]">
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-[100svh] grid-cols-1">
       <Header className="mb-9" />
       <div>
         <Outlet />
