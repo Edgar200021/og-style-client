@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router'
-import { useAppSelector } from '../../store/store.ts'
-import { getUser } from '../../store/user/userSlice.ts'
+//import { useAppSelector } from '../../store/store.ts'
+//import { getUser } from '../../store/user/userSlice.ts'
 import { cn } from '../../utils/cn.ts'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const AdminLayout = ({ className }: Props) => {
-  const user = useAppSelector(getUser)
+  //  const user = useAppSelector(getUser)
 
   return (
     <div className={cn('flex gap-x-10', className)}>

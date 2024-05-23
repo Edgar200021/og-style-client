@@ -1,4 +1,4 @@
-import { AddCartProduct } from '@/store/cart/types'
+import { AddCartProductRequest} from '@/store/cart/types'
 import { Product } from '@/store/product/types'
 import { cn } from '@/utils'
 import { useState } from 'react'
@@ -22,7 +22,7 @@ export const AddToCartActions = ({
   size,
 }: Props) => {
   const [characteristics, setCharacteristics] = useState<
-    Omit<AddCartProduct, 'productId'>
+    Omit<AddCartProductRequest, 'productId'>
   >({
     color: '',
     size: '',

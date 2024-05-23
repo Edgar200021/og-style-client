@@ -8,7 +8,7 @@ export const GithubAuthorizePage = () => {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
   const navigate = useNavigate()
-  const [githubSignIn, { isLoading }] = useSignInGithubMutation()
+  const [githubSignIn] = useSignInGithubMutation()
 
   useEffect(() => {
     if (!code) {
