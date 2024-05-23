@@ -8,7 +8,8 @@ import {
 import { deleteUser } from './user/userSlice'
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:4000/api/v1',
+  //  baseUrl: 'http://localhost:4000/api/v1',
+  baseUrl: 'https://og-style-server.vercel.app/',
   credentials: 'include',
   prepareHeaders: headers => {
     headers.set('Content-Type', 'application/json')
