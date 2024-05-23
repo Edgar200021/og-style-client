@@ -34,11 +34,11 @@ export const SingleProduct = ({
   brand,
   id,
 }: Props) => {
-
   return (
     <div className={cn('', className)}>
       <Swiper
         style={{
+          //@ts-expect-error ...
           '--swiper-pagination-color': '#fff',
           '--swiper-pagination-border': '0px',
           '--swiper-pagination-bullet-size': '40px',
@@ -71,9 +71,15 @@ export const SingleProduct = ({
 
       <div className="flex gap-x-[18px] container">
         <div className="hidden min-[1026px]:grid  grid-cols-2 grid-rows-[repeat(2,minmax(500px,510px))] gap-5">
-          {images.map(image => <div className="rounded-xl overflow-hidden" key={image}>
-            <img src={image} className="h-full w-full object-cover"  alt={name}/>
-          </div>)}
+          {images.map(image => (
+            <div className="rounded-xl overflow-hidden" key={image}>
+              <img
+                src={image}
+                className="h-full w-full object-cover"
+                alt={name}
+              />
+            </div>
+          ))}
         </div>
         <div className="w-full max-w-[640px]">
           <h1 className="uppercase font-medium tracking-[0.01em] text-black text-xl md:text-2xl max-w-full mb-8 ">
@@ -202,7 +208,10 @@ export const SingleProduct = ({
                 </Button>
               )}
             >
-              <ProductList className={'[&>article]'} filters={{ brand, limit: 2 }} />
+              <ProductList
+                className={'[&>article]'}
+                filters={{ brand, limit: 2 }}
+              />
             </Collapsible>
           </div>
         </div>

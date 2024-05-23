@@ -22,7 +22,7 @@ interface Props {
 
 const { set, get } = cache('productFilters')
 
-export const ProductFilters = ({  category }: Props) => {
+export const ProductFilters = ({ category }: Props) => {
   const { queryParams, setQueryParams } = useQueryParams(
     'category',
     'minPrice',
@@ -54,9 +54,8 @@ export const ProductFilters = ({  category }: Props) => {
   const ref = useRef<HTMLDivElement>(null)
   useOnClickOutside(ref, () => {
     setIsOpened(false)
-  document.body.style.overflow = "auto"
-  }
-)
+    document.body.style.overflow = 'auto'
+  })
 
   useEffect(() => {
     const filtersFromCache = get()
@@ -96,7 +95,7 @@ export const ProductFilters = ({  category }: Props) => {
       <Button
         onClick={() => {
           setIsOpened(true)
-          document.body.style.overflow = "hidden"
+          document.body.style.overflow = 'hidden'
         }}
         className="flex items-center gap-x-1 text-gray-500 tracking-[0.01em] text-base"
         variant="clear"
@@ -118,16 +117,20 @@ export const ProductFilters = ({  category }: Props) => {
         >
           <div className="flex items-center justify-between ">
             <span className="text-black text-2xl">Фильтры</span>
-            <Button onClick={() => {
-              setIsOpened(false)
-              document.body.style.overflow = "auto"
-            }} variant="clear">
+            <Button
+              onClick={() => {
+                setIsOpened(false)
+                document.body.style.overflow = 'auto'
+              }}
+              variant="clear"
+            >
               <CloseIcon />
             </Button>
           </div>
 
           <div className="flex flex-col gap-y-5 ">
             {Object.entries(data.data).map(([key]) => {
+              //@ts-expect-error ---
               const label = PRODUCT_FILTER_LABELS[key]
               if (!label) return null
 
