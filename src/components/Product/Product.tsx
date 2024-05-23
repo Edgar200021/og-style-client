@@ -51,6 +51,7 @@ export const Product = ({
 
         <Swiper
           style={{
+            //@ts-expect-error ---
             '--swiper-pagination-color': '#716969',
             '--swiper-pagination-bullet-inactive-color': '#ffffff',
           }}
